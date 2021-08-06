@@ -262,14 +262,14 @@ int main(void)
     insert_end(&dll, 11);
     insert_at(&dll, 2, 2);
     insert_at(&dll, 100, 1);
-    // print_node(dll);
+    print_node(dll);
     search(&dll, 2);
     search_from_behind(&dll, 2);
-    // delete_at(&dll, 3);
-    // delete_beginning(&dll);
-    // delete_end(&dll);
-    // print_node(dll);
-    // print_node_reverse(dll);
+    delete_at(&dll, 3);
+    delete_beginning(&dll);
+    delete_end(&dll);
+    print_node(dll);
+    print_node_reverse(dll);
     free_all(dll);
     return 0;
 }

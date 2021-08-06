@@ -105,6 +105,58 @@ void delete_beginning(struct Node **head)
     return;
 }
 
+void delete_end(struct Node **head)
+{
+    struct Node *end;
+    end = *head;
+    while (end->next != NULL && end->next->next != NULL) {
+        end = end->next;
+    }
+    struct Node *dummy = end->next;
+    end->next = NULL;
+    free(dummy);
+    return;
+}
+
+void delete_at(struct Node **head, int position)
+{
+    if (*head == NULL) {
+        printf("Linked list empty\n");
+        return;
+    }
+
+    if (position == 0 && *head != NULL) {
+        delete_beginning(&(*head));
+        return;
+    } else if (position > 0 && *head == NULL) {
+        printf("Out of range\n");
+        return;
+    }
+
+    struct Node *dummy;
+    dummy = *head;
+
+    while(position > 1) {
+        if (dummy->next == NULL && position == 1) {
+            delete_end(&(*head));
+            return;
+        } else if (dummy->next == NULL && position > 1) {
+            printf("Out of range\n");
+            return;
+        }
+
+        dummy = dummy->next;
+        position--;
+    }
+
+    struct Node *dum = dummy->next;
+    dummy->next = dum->next;
+    dum->next->prev = dummy;
+    free(dum);
+
+    return;
+}
+
 void print_node(struct Node *head)
 {
     while (head) {
@@ -150,10 +202,11 @@ int main(void)
     insert_at(&dll, 2, 2);
     insert_at(&dll, 100, 1);
     print_node(dll);
+    delete_at(&dll, 3);
     delete_beginning(&dll);
-    puts("========");
+    delete_end(&dll);
     print_node(dll);
-    // print_node_reverse(dll);
+    print_node_reverse(dll);
     free_all(dll);
     return 0;
 }

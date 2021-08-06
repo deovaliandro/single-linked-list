@@ -157,6 +157,40 @@ void delete_at(struct Node **head, int position)
     return;
 }
 
+void search(struct Node **head, int data)
+{
+    if (*head == NULL) {
+        printf("Linked list empty\n");
+        return;
+    }
+
+    int s_position = 0;
+
+    if ((*head)->next == NULL && ((*head)->data == data)) {
+        printf("Found in %d\n", s_position);
+        return;
+    }
+
+    struct Node *dummy;
+    dummy = *head;
+
+    while (dummy->next != NULL) {
+        if (dummy->data == data) {
+            printf("Found in %d\n", s_position);
+            return;
+        }
+        dummy = dummy->next;
+        s_position++;
+    }
+
+    printf("Data not found\n");
+}
+
+void search_from_behind(struct Node **node, int data)
+{
+    
+}
+
 void print_node(struct Node *head)
 {
     while (head) {

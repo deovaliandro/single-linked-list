@@ -38,7 +38,7 @@ void insert_last(struct Node **head, int value)
 
 void insert_at(struct Node **head, int value, int position)
 {   
-    if (position == 0) {
+    if (position == 0 && (*head) != NULL) {
         insert_beginning(&(*head), value);
         return;
     }

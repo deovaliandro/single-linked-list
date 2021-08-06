@@ -186,9 +186,36 @@ void search(struct Node **head, int data)
     printf("Data not found\n");
 }
 
-void search_from_behind(struct Node **node, int data)
+void search_from_behind(struct Node **head, int data)
 {
-    
+    if (*head == NULL) {
+        printf("Linked list empty\n");
+        return;
+    }
+
+    int s_position = 0;
+
+    if ((*head)->next == NULL && ((*head)->data == data)) {
+        printf("Found in %d\n", s_position);
+        return;
+    }
+
+    struct Node *end;
+    end = *head;
+
+    while (end->next != NULL) {
+        end = end->next;
+    }
+
+    while (end->prev != NULL) {
+        if (end->data == data) {
+            printf("Found in %d\n", s_position);
+            return;
+        }
+        end = end->prev;
+        s_position++;
+    }
+    printf("Data not found\n");
 }
 
 void print_node(struct Node *head)
@@ -235,12 +262,14 @@ int main(void)
     insert_end(&dll, 11);
     insert_at(&dll, 2, 2);
     insert_at(&dll, 100, 1);
-    print_node(dll);
-    delete_at(&dll, 3);
-    delete_beginning(&dll);
-    delete_end(&dll);
-    print_node(dll);
-    print_node_reverse(dll);
+    // print_node(dll);
+    search(&dll, 2);
+    search_from_behind(&dll, 2);
+    // delete_at(&dll, 3);
+    // delete_beginning(&dll);
+    // delete_end(&dll);
+    // print_node(dll);
+    // print_node_reverse(dll);
     free_all(dll);
     return 0;
 }

@@ -83,6 +83,28 @@ void insert_at(struct Node **head, int data, int position)
     dum->prev = current;
 }
 
+void delete_beginning(struct Node **head)
+{
+    if (*head == NULL) {
+        printf("Linked list empty\n");
+        return;
+    }
+
+    if ((*head)->next == NULL) {
+        *head = NULL;
+        return;
+    }
+    
+    struct Node *dummy;
+    dummy = *head;
+    
+    *head = (*head)->next;
+    (*head)->prev = NULL;
+    free(dummy);
+
+    return;
+}
+
 void print_node(struct Node *head)
 {
     while (head) {
@@ -128,8 +150,10 @@ int main(void)
     insert_at(&dll, 2, 2);
     insert_at(&dll, 100, 1);
     print_node(dll);
-    puts("================");
-    print_node_reverse(dll);
+    delete_beginning(&dll);
+    puts("========");
+    print_node(dll);
+    // print_node_reverse(dll);
     free_all(dll);
     return 0;
 }

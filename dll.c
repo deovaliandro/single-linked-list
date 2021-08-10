@@ -26,12 +26,10 @@ void insert_beginning(struct Node** head, int data)
 
 void insert_end(struct Node** head, int data)
 {
-        struct Node* end;
+        struct Node* end = *head;
         struct Node* current = (struct Node*)malloc(sizeof(*current));
         current->data = data;
         current->next = NULL;
-
-        end = *head;
 
         while (end->next != NULL) {
                 end = end->next;

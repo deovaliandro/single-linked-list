@@ -9,7 +9,7 @@ struct Node
 
 void insert_beginning(struct Node **head, int value)
 {
-    struct Node *p_head = (struct Node *) malloc(sizeof(*p_head));;
+    struct Node *p_head = (struct Node *) malloc(sizeof(*p_head));
     p_head->data = value;
     p_head->next = *head;
     *head = p_head;
@@ -53,15 +53,19 @@ void insert_at(struct Node **head, int value, int position)
     if (*head == NULL && position == 0) {
         *head = a_head;
         return;
-    } else {
-        free(a_head);
-        printf("Out of range\n");
-        return;
     }
 
     dummy = *head;
 
     while (position > 1) {
+        if (dummy->next == NULL && position == 1) {
+            insert_last(&(*head), data);
+            return;
+        } else if (dummy->next == NULL && position > 1) {
+            printf("Out of range\n");
+            return;
+        }
+
         if (dummy->next == NULL) {
             break;
         }
